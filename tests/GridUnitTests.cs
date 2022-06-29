@@ -53,7 +53,7 @@ public class GridUnitTests
         Assert.Equal(CellState.Ship, grid.GetCell(0, 3));
     }
 
-    
+
     [Fact]
     public void PlaceShip_HorizontalBattleshipAtOrigin_FiveShipCellsRightOfOrigin()
     {
@@ -67,5 +67,140 @@ public class GridUnitTests
         Assert.Equal(CellState.Ship, grid.GetCell(1, 0));
         Assert.Equal(CellState.Ship, grid.GetCell(2, 0));
         Assert.Equal(CellState.Ship, grid.GetCell(3, 0));
+    }
+
+    [Fact]
+    public void TakeShot_TargetIsShip_TargetIsHitReturnsTrue() 
+    {
+        // Arrange
+        var grid = new Grid(10, 10);
+        var ship = Ship.Destroyer;
+
+        int shipX = 0;
+        int shipY = 0;
+        grid.PlaceShip(ship, shipX, shipY, Orientation.Horizontal);
+
+        int targetX = 0;
+        int targetY = 0;
+
+        // Act
+        var result = grid.TakeShot(targetX, targetY);
+
+        // Assert
+        Assert.True(result);
+        Assert.Equal(CellState.Hit, grid.GetCell(targetX, targetY));
+    }
+
+    [Fact]
+    public void TakeShot_TargetIsHit_TargetIsHitReturnsFalse()
+    {
+        // Arrange
+        var grid = new Grid(10, 10);
+        var ship = Ship.Destroyer;
+
+        int shipX = 0;
+        int shipY = 0;
+        grid.PlaceShip(ship, shipX, shipY, Orientation.Horizontal);
+
+        int targetX = 0;
+        int targetY = 0;
+        grid.TakeShot(targetX, targetY);
+       
+        // Act
+        var result = grid.TakeShot(targetX, targetY); // Hit the ship same cell twice.
+
+        // Assert
+        Assert.False(result);
+        Assert.Equal(CellState.Hit, grid.GetCell(targetX, targetY));
+    }
+
+    [Fact]
+    public void TakeShot_TargetIsSea_TargetIsMissReturnsFalse() 
+    {
+        // Arrange
+        var grid = new Grid(10, 10);
+        var ship = Ship.Destroyer;
+
+        int shipX = 0;
+        int shipY = 0;
+        grid.PlaceShip(ship, shipX, shipY, Orientation.Horizontal);
+
+        int targetX = 0;
+        int targetY = 1;
+
+        // Act
+        var result = grid.TakeShot(targetX, targetY);
+
+        // Assert
+        Assert.False(result);
+        Assert.Equal(CellState.Miss, grid.GetCell(targetX, targetY));
+    }
+
+    [Fact]
+    public void TakeShot_TargetIsMiss_TargetIsMissReturnsFalse()
+    {
+        // Arrange
+        var grid = new Grid(10, 10);
+        var ship = Ship.Destroyer;
+
+        int shipX = 0;
+        int shipY = 0;
+        grid.PlaceShip(ship, shipX, shipY, Orientation.Horizontal);
+
+        int targetX = 0;
+        int targetY = 1;
+        grid.TakeShot(targetX, targetY);
+
+        // Act
+        var result = grid.TakeShot(targetX, targetY); // Hit the same cell twice.
+
+        // Assert
+        Assert.False(result);
+        Assert.Equal(CellState.Miss, grid.GetCell(targetX, targetY));
+    }
+
+    [Fact]
+    public void HasFloatingShips_LastShipCellHit_IsFalse()
+    {
+        // Arrange
+        var grid = new Grid(10, 10);
+        var ship = Ship.Destroyer;
+
+        int shipX = 0;
+        int shipY = 0;
+        grid.PlaceShip(ship, shipX, shipY, Orientation.Horizontal);
+
+        grid.TakeShot(0, shipY);
+        grid.TakeShot(1, shipY);
+        grid.TakeShot(2, shipY);
+        grid.TakeShot(3, shipY);
+
+        // Act
+        var hasFloatingShips = grid.HasFloatingShips;;
+
+        // Assert
+        Assert.False(hasFloatingShips);
+    }
+
+    [Fact]
+    public void HasFloatingShips_OneShipSunkOneShipFloating_IsTrue()
+    {
+        // Arrange
+        var grid = new Grid(10, 10);
+
+        grid.PlaceShip(Ship.Destroyer, 0, 0, Orientation.Horizontal);
+        grid.PlaceShip(Ship.Battleship, 3, 2, Orientation.Vertical);
+
+
+        grid.TakeShot(0, 0);
+        grid.TakeShot(1, 0);
+        grid.TakeShot(2, 0);
+        grid.TakeShot(3, 0);
+
+        // Act
+        var hasFloatingShips = grid.HasFloatingShips;;
+
+        // Assert
+        Assert.True(hasFloatingShips);
     }
 }
