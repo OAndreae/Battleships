@@ -17,13 +17,14 @@ public class Grid
     // The total number of ship cells originally placed in the grid.
     private int totalShipCells = 0;
 
-       // Returns true if there are any ships left to be hit.
-    public bool HasFloatingShips {
+    // Returns true if there are any ships left to be hit.
+    public bool HasFloatingShips
+    {
         get => totalShipCells > totalHits;
     }
 
     // Create a 10x10 grid and initialize all cells to Sea.
-    public Grid() : this (10, 10)
+    public Grid() : this(10, 10)
     {
     }
 
@@ -32,23 +33,27 @@ public class Grid
     /// </summary>
     /// <param name="width">The width of the grid.</param>
     /// <param name="height">The height of the grid.</param>
-    public Grid(int width, int height) {
+    public Grid(int width, int height)
+    {
         _width = width;
         _height = height;
         cells = new CellState[_width, _height];
 
         // Initialise all cells to be empty.
-        for (int i = 0; i < _width; i++) {
-            for (int j = 0; j < _height; j++) {
+        for (int i = 0; i < _width; i++)
+        {
+            for (int j = 0; j < _height; j++)
+            {
                 cells[i, j] = CellState.Sea;
             }
         }
     }
 
-    public CellState GetCell(int x, int y) {
-        if(x < 0 || x >= _width || y < 0 || y >= _height)
+    public CellState GetCell(int x, int y)
+    {
+        if (x < 0 || x >= _width || y < 0 || y >= _height)
             throw new ArgumentOutOfRangeException("Coordinates out of bounds");
-        
+
         return cells[x, y];
     }
 
@@ -60,34 +65,40 @@ public class Grid
     /// <param name="y"></param>
     /// <param name="isVertical"></param>
     /// <returns></returns>
-    public bool CanPlaceShip(Ship ship, int x, int y, Orientation orientation) {
-        if(x < 0 || y < 0)
+    public bool CanPlaceShip(Ship ship, int x, int y, Orientation orientation)
+    {
+        if (x < 0 || y < 0)
             return false;
-        
-        if (orientation == Orientation.Vertical) {
+
+        if (orientation == Orientation.Vertical)
+        {
             // Check if the ship will fit in the grid.
             if (y + ship.Size > _height)
                 return false;
 
             // Check if the ship will overlap with another ship in the same column.
-            for (int i = 0; i < ship.Size; i++) {
+            for (int i = 0; i < ship.Size; i++)
+            {
                 if (cells[x, y + i] != CellState.Sea)
                     return false;
             }
-        } else {
+        }
+        else
+        {
             // Check if the ship will fit in the grid.
             if (x + ship.Size > _width)
                 return false;
 
             // Check if the ship will overlap with another ship in the same row.
-            for (int i = 0; i < ship.Size; i++) {
+            for (int i = 0; i < ship.Size; i++)
+            {
                 if (cells[x + i, y] != CellState.Sea)
                     return false;
             }
         }
 
         // The ship will fit in the grid and will not overlap with another ship.
-        return true;   
+        return true;
     }
 
     /// <summary>
@@ -108,14 +119,15 @@ public class Grid
     /// True if the ship can be placed in the given coordinates. False
     /// otherwise.
     /// </returns>
-    public bool PlaceShip(Ship ship, int x, int y, Orientation orientation) 
+    public bool PlaceShip(Ship ship, int x, int y, Orientation orientation)
     {
         // Check if the ship can be placed at the given coordinates.
         if (!CanPlaceShip(ship, x, y, orientation))
             return false;
-        
+
         // Place the ship.
-        for (int i = 0; i < ship.Size; i++) {
+        for (int i = 0; i < ship.Size; i++)
+        {
             if (orientation == Orientation.Vertical)
                 cells[x, y + i] = CellState.Ship;
             else
@@ -125,5 +137,28 @@ public class Grid
         // Increment the total number of ship cells.
         totalShipCells += ship.Size;
         return true;
+    }
+
+    public bool TakeShot(int targetX, int targetY)
+    {
+        if (targetX < 0 || targetX >= _width || targetY < 0 || targetY >= _height)
+            throw new ArgumentOutOfRangeException("Coordinates out of bounds");
+
+        switch(cells[targetX, targetY])
+        {
+            case CellState.Sea:
+                cells[targetX, targetY] = CellState.Miss;
+                return false;
+            case CellState.Ship:
+                cells[targetX, targetY] = CellState.Hit;
+                totalHits++;
+                return true;
+            case CellState.Hit:
+                return false;
+            case CellState.Miss:
+                return false;
+            default:
+                return false;
+        }
     }
 }
