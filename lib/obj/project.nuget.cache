@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qrYIcndA4oNSTHsSlrF0HqBVBeSZ8qfjxfi8JICEYjThPZBk9NaZjoqWW5mXDgMEqC4XfQtXQ3dUYJko/j6uGg==",
+  "dgSpecHash": "Vyy9MRkfDTnmqoH6FJqhT57rvv4UrsJidOpbhYUcCCGUZ4FAwiLi8stMFJvA5R9jERmTMeJWY/xY0SkzerKWkw==",
   "success": true,
-  "projectFilePath": "/Users/oliver/Projects/Battleships/lib/lib.csproj",
+  "projectFilePath": "/Users/oliver/Projects/Battleships/lib/BattleshipsEngine.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -1,0 +1,140 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/oliver/Projects/Battleships/tests/BattleshipEnginerUnitTests.csproj": {}
+  },
+  "projects": {
+    "/Users/oliver/Projects/Battleships/lib/BattleshipsEngine.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/oliver/Projects/Battleships/lib/BattleshipsEngine.csproj",
+        "projectName": "BattleshipsEngine",
+        "projectPath": "/Users/oliver/Projects/Battleships/lib/BattleshipsEngine.csproj",
+        "packagesPath": "/Users/oliver/.nuget/packages/",
+        "outputPath": "/Users/oliver/Projects/Battleships/lib/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/oliver/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.301/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/oliver/Projects/Battleships/tests/BattleshipEnginerUnitTests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/oliver/Projects/Battleships/tests/BattleshipEnginerUnitTests.csproj",
+        "projectName": "BattleshipEnginerUnitTests",
+        "projectPath": "/Users/oliver/Projects/Battleships/tests/BattleshipEnginerUnitTests.csproj",
+        "packagesPath": "/Users/oliver/.nuget/packages/",
+        "outputPath": "/Users/oliver/Projects/Battleships/tests/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/oliver/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/Users/oliver/Projects/Battleships/lib/BattleshipsEngine.csproj": {
+                "projectPath": "/Users/oliver/Projects/Battleships/lib/BattleshipsEngine.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.9.4, )"
+            },
+            "coverlet.collector": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.0.2, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.4.1, )"
+            },
+            "xunit.runner.visualstudio": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.4.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.301/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

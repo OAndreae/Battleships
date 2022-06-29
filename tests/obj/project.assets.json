@@ -1670,6 +1670,16 @@
         "build": {
           "build/netcoreapp2.1/xunit.runner.visualstudio.props": {}
         }
+      },
+      "BattleshipsEngine/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/BattleshipsEngine.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BattleshipsEngine.dll": {}
+        }
       }
     }
   },
@@ -5906,10 +5916,16 @@
         "xunit.runner.visualstudio.2.4.3.nupkg.sha512",
         "xunit.runner.visualstudio.nuspec"
       ]
+    },
+    "BattleshipsEngine/1.0.0": {
+      "type": "project",
+      "path": "../lib/BattleshipsEngine.csproj",
+      "msbuildProject": "../lib/BattleshipsEngine.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "BattleshipsEngine >= 1.0.0",
       "Microsoft.NET.Test.Sdk >= 16.9.4",
       "coverlet.collector >= 3.0.2",
       "xunit >= 2.4.1",
@@ -5922,9 +5938,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/oliver/Projects/Battleships/tests/tests.csproj",
-      "projectName": "tests",
-      "projectPath": "/Users/oliver/Projects/Battleships/tests/tests.csproj",
+      "projectUniqueName": "/Users/oliver/Projects/Battleships/tests/BattleshipEnginerUnitTests.csproj",
+      "projectName": "BattleshipEnginerUnitTests",
+      "projectPath": "/Users/oliver/Projects/Battleships/tests/BattleshipEnginerUnitTests.csproj",
       "packagesPath": "/Users/oliver/.nuget/packages/",
       "outputPath": "/Users/oliver/Projects/Battleships/tests/obj/",
       "projectStyle": "PackageReference",
@@ -5941,7 +5957,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/Users/oliver/Projects/Battleships/lib/BattleshipsEngine.csproj": {
+              "projectPath": "/Users/oliver/Projects/Battleships/lib/BattleshipsEngine.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -5990,7 +6010,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.100-preview.7.21379.14/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.301/RuntimeIdentifierGraph.json"
       }
     }
   }

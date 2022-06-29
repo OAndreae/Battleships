@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/oliver/Projects/Battleships/lib/lib.csproj",
-      "projectName": "lib",
-      "projectPath": "/Users/oliver/Projects/Battleships/lib/lib.csproj",
+      "projectUniqueName": "/Users/oliver/Projects/Battleships/lib/BattleshipsEngine.csproj",
+      "projectName": "BattleshipsEngine",
+      "projectPath": "/Users/oliver/Projects/Battleships/lib/BattleshipsEngine.csproj",
       "packagesPath": "/Users/oliver/.nuget/packages/",
       "outputPath": "/Users/oliver/Projects/Battleships/lib/obj/",
       "projectStyle": "PackageReference",
@@ -59,7 +59,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.100-preview.7.21379.14/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.301/RuntimeIdentifierGraph.json"
       }
     }
   }

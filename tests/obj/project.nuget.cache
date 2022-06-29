@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yf3zm2aogon/Rd7tKroxX51mGKWsHoEG3D8p9GG6+VTaYj4oPEUatVTm4mZqA/cuXJMlyWQ9nL0oRYvW1L8KwQ==",
+  "dgSpecHash": "V5bhWqj4M+Hka0T2ZomcZbKMU1u8UGlzMx1PvrHOv4HmLpdgRLTg0hgceOKHvgfAPa9Y7V+F+bIi3pFI4z/ulQ==",
   "success": true,
-  "projectFilePath": "/Users/oliver/Projects/Battleships/tests/tests.csproj",
+  "projectFilePath": "/Users/oliver/Projects/Battleships/tests/BattleshipEnginerUnitTests.csproj",
   "expectedPackageFiles": [
     "/Users/oliver/.nuget/packages/coverlet.collector/3.0.2/coverlet.collector.3.0.2.nupkg.sha512",
     "/Users/oliver/.nuget/packages/microsoft.codecoverage/16.9.4/microsoft.codecoverage.16.9.4.nupkg.sha512",

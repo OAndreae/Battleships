@@ -2,7 +2,7 @@
 A console-based game of MB's Battleships.
 
 ## Guidelines
-The final code should be simple and readable: not over-engineered. Research the following practices and *then* code the Battleships application, implementing the practices.
+The final code should be simple and readable: not over-engineered. Research the following practices and *then* code the Battleships application.
 
 **Code quality and design topics:**
 * Kent Beck's Four Rules of Simple Design
