@@ -5,9 +5,9 @@ public class Grid
 {
 
     // The width of the grid.
-    private readonly int _width = 10;
+    private readonly int width = 10;
     // The height of the grid.
-    private readonly int _height = 10;
+    private readonly int height = 10;
 
     // The grid is a 2D array of cells.
     private CellState[,] cells;
@@ -35,14 +35,14 @@ public class Grid
     /// <param name="height">The height of the grid.</param>
     public Grid(int width, int height)
     {
-        _width = width;
-        _height = height;
-        cells = new CellState[_width, _height];
+        this.width = width;
+        this.height = height;
+        cells = new CellState[this.width, this.height];
 
         // Initialise all cells to be empty.
-        for (int i = 0; i < _width; i++)
+        for (int i = 0; i < this.width; i++)
         {
-            for (int j = 0; j < _height; j++)
+            for (int j = 0; j < this.height; j++)
             {
                 cells[i, j] = CellState.Sea;
             }
@@ -51,7 +51,7 @@ public class Grid
 
     public CellState GetCell(int x, int y)
     {
-        if (x < 0 || x >= _width || y < 0 || y >= _height)
+        if (x < 0 || x >= width || y < 0 || y >= height)
             throw new ArgumentOutOfRangeException("Coordinates out of bounds");
 
         return cells[x, y];
@@ -73,7 +73,7 @@ public class Grid
         if (orientation == Orientation.Vertical)
         {
             // Check if the ship will fit in the grid.
-            if (y + ship.Size > _height)
+            if (y + ship.Size > height)
                 return false;
 
             // Check if the ship will overlap with another ship in the same column.
@@ -86,7 +86,7 @@ public class Grid
         else
         {
             // Check if the ship will fit in the grid.
-            if (x + ship.Size > _width)
+            if (x + ship.Size > width)
                 return false;
 
             // Check if the ship will overlap with another ship in the same row.
@@ -139,9 +139,16 @@ public class Grid
         return true;
     }
 
+    /// <summary>
+    /// Shoots at the given coordinates and updates the state of the cell.
+    /// Throws ArgumentOutOfRangeException if the coordinates are out of bounds.
+    /// </summary>
+    /// <param name="targetX">The x-coordinate of the target cell.</param>
+    /// <param name="targetY">The y-coordinate of the target cell</param>
+    /// <returns>True if and only if the target was originally a Ship. Otherwise returns false.</returns>
     public bool TakeShot(int targetX, int targetY)
     {
-        if (targetX < 0 || targetX >= _width || targetY < 0 || targetY >= _height)
+        if (targetX < 0 || targetX >= width || targetY < 0 || targetY >= height)
             throw new ArgumentOutOfRangeException("Coordinates out of bounds");
 
         switch(cells[targetX, targetY])

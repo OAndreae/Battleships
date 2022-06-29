@@ -1,3 +1,5 @@
+namespace BattleshipsEngine;
+
 /// <summary>
 /// A ship that can be placed on a Grid.
 /// </summary>
