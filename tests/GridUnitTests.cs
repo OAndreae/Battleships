@@ -30,7 +30,7 @@ public class GridUnitTests
         // Arrange
         var grid = new Grid(10, 10);
         var ship1 = Ship.Destroyer;
-        grid.PlaceShip(ship1, x1, y1, orientation1);
+        grid.TryPlaceShip(ship1, x1, y1, orientation1);
         var ship2 = Ship.Destroyer;
         // Act
         var result = grid.CanPlaceShip(ship2, x2, y2, orientation2);
@@ -45,7 +45,7 @@ public class GridUnitTests
         var grid = new Grid(10, 10);
         var ship = Ship.Destroyer;
         // Act
-        grid.PlaceShip(ship, 0, 0, Orientation.Vertical);
+        grid.TryPlaceShip(ship, 0, 0, Orientation.Vertical);
         // Assert
         Assert.Equal(CellState.Ship, grid.GetCell(0, 0));
         Assert.Equal(CellState.Ship, grid.GetCell(0, 1));
@@ -61,7 +61,7 @@ public class GridUnitTests
         var grid = new Grid(10, 10);
         var ship = Ship.Battleship;
         // Act
-        grid.PlaceShip(ship, 0, 0, Orientation.Horizontal);
+        grid.TryPlaceShip(ship, 0, 0, Orientation.Horizontal);
         // Assert
         Assert.Equal(CellState.Ship, grid.GetCell(0, 0));
         Assert.Equal(CellState.Ship, grid.GetCell(1, 0));
@@ -70,7 +70,7 @@ public class GridUnitTests
     }
 
     [Fact]
-    public void TakeShot_TargetIsShip_TargetIsHitReturnsTrue() 
+    public void TakeShot_TargetIsShip_TargetIsHitReturnsTrue()
     {
         // Arrange
         var grid = new Grid(10, 10);
@@ -78,7 +78,7 @@ public class GridUnitTests
 
         int shipX = 0;
         int shipY = 0;
-        grid.PlaceShip(ship, shipX, shipY, Orientation.Horizontal);
+        grid.TryPlaceShip(ship, shipX, shipY, Orientation.Horizontal);
 
         int targetX = 0;
         int targetY = 0;
@@ -100,12 +100,12 @@ public class GridUnitTests
 
         int shipX = 0;
         int shipY = 0;
-        grid.PlaceShip(ship, shipX, shipY, Orientation.Horizontal);
+        grid.TryPlaceShip(ship, shipX, shipY, Orientation.Horizontal);
 
         int targetX = 0;
         int targetY = 0;
         grid.TakeShot(targetX, targetY);
-       
+
         // Act
         var result = grid.TakeShot(targetX, targetY); // Hit the ship same cell twice.
 
@@ -115,7 +115,7 @@ public class GridUnitTests
     }
 
     [Fact]
-    public void TakeShot_TargetIsSea_TargetIsMissReturnsFalse() 
+    public void TakeShot_TargetIsSea_TargetIsMissReturnsFalse()
     {
         // Arrange
         var grid = new Grid(10, 10);
@@ -123,7 +123,7 @@ public class GridUnitTests
 
         int shipX = 0;
         int shipY = 0;
-        grid.PlaceShip(ship, shipX, shipY, Orientation.Horizontal);
+        grid.TryPlaceShip(ship, shipX, shipY, Orientation.Horizontal);
 
         int targetX = 0;
         int targetY = 1;
@@ -145,7 +145,7 @@ public class GridUnitTests
 
         int shipX = 0;
         int shipY = 0;
-        grid.PlaceShip(ship, shipX, shipY, Orientation.Horizontal);
+        grid.TryPlaceShip(ship, shipX, shipY, Orientation.Horizontal);
 
         int targetX = 0;
         int targetY = 1;
@@ -168,7 +168,7 @@ public class GridUnitTests
 
         int shipX = 0;
         int shipY = 0;
-        grid.PlaceShip(ship, shipX, shipY, Orientation.Horizontal);
+        grid.TryPlaceShip(ship, shipX, shipY, Orientation.Horizontal);
 
         grid.TakeShot(0, shipY);
         grid.TakeShot(1, shipY);
@@ -176,7 +176,7 @@ public class GridUnitTests
         grid.TakeShot(3, shipY);
 
         // Act
-        var hasFloatingShips = grid.HasFloatingShips;;
+        var hasFloatingShips = grid.HasFloatingShips; ;
 
         // Assert
         Assert.False(hasFloatingShips);
@@ -188,8 +188,8 @@ public class GridUnitTests
         // Arrange
         var grid = new Grid(10, 10);
 
-        grid.PlaceShip(Ship.Destroyer, 0, 0, Orientation.Horizontal);
-        grid.PlaceShip(Ship.Battleship, 3, 2, Orientation.Vertical);
+        grid.TryPlaceShip(Ship.Destroyer, 0, 0, Orientation.Horizontal);
+        grid.TryPlaceShip(Ship.Battleship, 3, 2, Orientation.Vertical);
 
 
         grid.TakeShot(0, 0);
@@ -198,7 +198,7 @@ public class GridUnitTests
         grid.TakeShot(3, 0);
 
         // Act
-        var hasFloatingShips = grid.HasFloatingShips;;
+        var hasFloatingShips = grid.HasFloatingShips; ;
 
         // Assert
         Assert.True(hasFloatingShips);
