@@ -1,4 +1,4 @@
-# Improvements
+# Feedback areas
 
 ## Testing
 * How can `Run()` be tested?
@@ -8,9 +8,10 @@
 
 ## BattleshipsGame
 * Injecting the I/O functions are parameters
-* Use of local functions
+* Move input validation loop to the `TakeTurn()` function?
 
 ## Program
 * Constant/read-only variables fields
 
 ## Other
+* XML vs double-slash comments for private fields (exposes information in assemblies?)
