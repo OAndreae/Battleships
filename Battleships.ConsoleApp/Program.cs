@@ -45,9 +45,10 @@ public class Program
     {
         DisplayGrid(own);
         WriteLine();
-        DisplayGrid(opponent);
+        WriteLine();
+        DisplayGrid(opponent, hideShips: true);
 
-        void DisplayGrid(Grid g)
+        void DisplayGrid(Grid g, bool hideShips = false)
         {
             // Output the column headers
             Write("   ");
@@ -59,15 +60,15 @@ public class Program
             WriteLine(new string('_', g.Width * 2));
 
             // Output each row of the grid.
-            for (int i = 0; i < g.Width; i++)
+            for (int y = 0; y < g.Width; y++)
             {
                 // Write the row letter.
-                Write($"{Convert.ToChar('A' + i)}| ");
+                Write($"{Convert.ToChar('A' + y)}| ");
 
                 // Output the contents of each row.
-                for (int j = 0; j < g.Height; j++)
+                for (int x = 0; x < g.Height; x++)
                 {
-                    Write($"{g.GetCell(i, j).ToChar()} ");
+                    DisplayCell(g.GetCell(x, y), hideShips);
                 }
                 WriteLine();
             }
@@ -85,11 +86,10 @@ public class Program
         DisplayColumnNumbers(own, opponent);
         DisplayGridRows(own, opponent, hideOpponentShips: false);
 
-        void WriteSpaces(int spaces)
-        {
-            Write(new string(' ', spaces));
-        }
+        void WriteSpaces(int spaces) => Write(new string(' ', spaces));
 
+
+        // Output the column headers.
         void DisplayHeaders(Grid own, Grid opponent, string ownMapHeader, string opponentMapHeader)
         {
             WriteSpaces(indentSize + own.Width - ownMapHeader.Length / 2);
@@ -101,7 +101,7 @@ public class Program
             WriteLine();
         }
 
-        // Output the column headers
+        // Output the column numbers.
         void DisplayColumnNumbers(Grid own, Grid opponent)
         {
             WriteSpaces(indentSize);
@@ -118,6 +118,7 @@ public class Program
             WriteLine();
         }
 
+        // Output each row of the each grid.
         void DisplayGridRows(Grid own, Grid opponent, bool hideOpponentShips)
         {
             for (int y = 0; y < own.Height; y++)
@@ -126,32 +127,49 @@ public class Program
                 Write($"{Convert.ToChar('A' + y)}| ");
                 for (int x = 0; x < own.Width; x++)
                 {
-                    Write($"{own.GetCell(x, y).ToChar()} ");
+                    DisplayCell(own.GetCell(x, y), hideOpponentShips);
                 }
 
                 WriteSpaces(gapLength - indentSize);
 
                 // Display row from the opponent's grid.
                 Write($"{Convert.ToChar('A' + y)}| ");
-                for (int j = 0; j < opponent.Width; j++)
+                for (int x = 0; x < opponent.Width; x++)
                 {
-                    Write($"{opponent.GetCell(j, y).ToChar(hideOpponentShips)} ");
+                    DisplayCell(opponent.GetCell(x, y), hideOpponentShips);
                 }
 
                 WriteLine();
             }
         }
     }
-}
 
-public static class CellStateExtensions
-{
-    public static string ToChar(this CellState c, bool hideShips = false) => c switch
+    /// <summary>
+    /// Outputs the cell as a coloured glyph.
+    /// </summary>
+    /// <param name="cell">The cell to output.</param>
+    /// <param name="hideShips">Set to true to display Ship cells as Sea.</param>
+    private static void DisplayCell(CellState cell, bool hideShips)
     {
-        CellState.Sea => "≈",
-        CellState.Ship => hideShips ? "≈" : "S",
-        CellState.Hit => "H",
-        CellState.Miss => "M",
-        _ => throw new Exception("Unknown cell state")
-    };
+        Console.ForegroundColor = cell switch
+        {
+            CellState.Sea => ConsoleColor.White,
+            CellState.Ship => ConsoleColor.White,
+            CellState.Miss => ConsoleColor.Cyan,
+            CellState.Hit => ConsoleColor.Red,
+            _ => throw new InvalidOperationException($"Unexpected cell type: {cell}")
+        };
+
+        char glyph = cell switch
+        {
+            CellState.Sea => '≈',
+            CellState.Ship => hideShips ? '≈' : 'S',
+            CellState.Hit => 'H',
+            CellState.Miss => 'M',
+            _ => throw new Exception($"Unexpected cell type: {cell}")
+        };
+
+        Write($"{glyph} ");
+        Console.ResetColor();
+    }
 }
