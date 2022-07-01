@@ -9,13 +9,37 @@ public class Program
     public static void Main(string[] args)
     {
         var game = new BattleshipsGame(InputPlayerCoordinates, RandomCoordinate, DisplayMapsHorizontally);
+        OutputWelcomeMessage();
         game.Run();
+    }
+
+    private static void OutputWelcomeMessage() 
+    {
+        WriteLine();
+        WriteLine("Welcome to Battleships.\n\n" +
+        "At each turn, enter the coordinates of the square you wish to attack (e.g. A0 for the top left corner).\n" +
+        "Squares are marked as follows:\n" +
+        "  ≈ - Sea\n" +
+        "  S - Ship");
+        Console.ForegroundColor = ConsoleColor.Red;
+        Write("  X");
+        Console.ResetColor();
+        WriteLine(" - Hit");
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Write("  M");
+        Console.ResetColor();
+        WriteLine(" - Miss");
+
+        WriteLine("\nPress CMD+C or CTRL+C to exit at any time.\n");
+        WriteLine("Good luck.");
     }
 
     private static (int, int) InputPlayerCoordinates(int gridWidth, int gridHeight)
     {
         int y;
         int x;
+
+        // Keep prompting the user until they enter a valid coordinate.
         while (true)
         {
             WriteLine("Please input a coordinate (e.g. A0).");
@@ -25,6 +49,7 @@ public class Program
             if (input?.Length != 2)
                 continue;
 
+            // Convert the character input to integers.
             y = input[0] - 'A';
             x = input[1] - '0'; ;
 
@@ -41,6 +66,11 @@ public class Program
         return (random.Next(gridWidth), random.Next(gridHeight));
     }
 
+    /// <summary>
+    /// Displays the two grids one above the other.
+    /// </summary>
+    /// <param name="own">The current player's grid (displayed on top).</param>
+    /// <param name="opponent">The opponent's grid (displayed at the bottom).</param>
     private static void DisplayMapsVertically(Grid own, Grid opponent)
     {
         DisplayGrid(own);
@@ -75,6 +105,11 @@ public class Program
         }
     }
 
+    /// <summary>
+    /// Displays the two grids side by side.
+    /// </summary>
+    /// <param name="own">The current player's grid (displayed on the left)</param>
+    /// <param name="opponent">The opponent's grid (displayed on the right with ship positions hidden).</param>
     private static void DisplayMapsHorizontally(Grid own, Grid opponent)
     {
         const int gapLength = 16;
@@ -82,12 +117,13 @@ public class Program
         const string ownMapHeader = "YOUR MAP";
         const string opponentMapHeader = "OPPONENT'S MAP";
 
+        WriteLine();
         DisplayHeaders(own, opponent, ownMapHeader, opponentMapHeader);
         DisplayColumnNumbers(own, opponent);
         DisplayGridRows(own, opponent, hideOpponentShips: false);
+        WriteLine();
 
         void WriteSpaces(int spaces) => Write(new string(' ', spaces));
-
 
         // Output the column headers.
         void DisplayHeaders(Grid own, Grid opponent, string ownMapHeader, string opponentMapHeader)
