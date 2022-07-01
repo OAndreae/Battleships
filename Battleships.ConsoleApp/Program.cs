@@ -13,6 +13,9 @@ public class Program
         game.Run();
     }
 
+    /// <summary>
+    /// Outputs a welcome message and instructions for the player.
+    /// </summary>
     private static void OutputWelcomeMessage() 
     {
         WriteLine();
@@ -34,6 +37,12 @@ public class Program
         WriteLine("Good luck.");
     }
 
+    /// <summary>
+    /// Inputs a valid pair of (x,y) coordinates from the user.
+    /// </summary>
+    /// <param name="gridWidth">The width of the grid. The x coordinate can be at most <c>gridWidth - 1</c></param>
+    /// <param name="gridHeight">The height of the grid. The y coordinate can be at most <c>gridHeight - 1</c><</param>
+    /// <returns>A pair of valid (x,y) coordinates.</returns>
     private static (int, int) InputPlayerCoordinates(int gridWidth, int gridHeight)
     {
         int y;
@@ -60,6 +69,12 @@ public class Program
         }
     }
 
+    /// <summary>
+    /// Generates a random pair of coordinates such that x ∈ [0, gridWidth) and y ∈ [0, gridHeight).
+    /// </summary>
+    /// <param name="gridWidth">The width of the grid. The x coordinate can be at most <c>gridWidth - 1</c></param>
+    /// <param name="gridHeight">The height of the grid. The y coordinate can be at most <c>gridHeight - 1</c><</param>
+    /// <returns>A pair of valid (x,y) coordinates.</returns>
     private static (int, int) RandomCoordinate(int gridWidth, int gridHeight)
     {
         var random = new Random();
