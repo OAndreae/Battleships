@@ -9,10 +9,10 @@ public record Ship {
     /// <summary>
     /// A Ship of size 4.
     /// </summary>
-    public static Ship Destroyer = new Ship { Size = 4 };
-    
+    public static Ship Destroyer { get => new Ship { Size = 4 }; }
+
     /// <summary>
     /// A ship of size 5.
     /// </summary>
-    public static Ship Battleship = new Ship { Size = 5 };
+    public static Ship Battleship { get => new Ship { Size = 5 }; }
 }
