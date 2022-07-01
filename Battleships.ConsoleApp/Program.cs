@@ -215,7 +215,7 @@ public class Program
             CellState.Ship => hideShips ? '≈' : 'S',
             CellState.Hit => 'H',
             CellState.Miss => 'M',
-            _ => throw new Exception($"Unexpected cell type: {cell}")
+            _ => throw new InvalidOperationException($"Unexpected cell type: {cell}")
         };
 
         Write($"{glyph} ");
