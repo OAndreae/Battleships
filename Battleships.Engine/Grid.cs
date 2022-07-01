@@ -2,23 +2,42 @@
 using System.Text;
 
 namespace Battleships.Engine;
+
+/// <summary>
+/// Represents a grid of cells in the game.
+/// </summary>
 public class Grid
 {
 
-    // The width of the grid.
+    /// <summary>
+    /// The width of the grid.
+    /// </summary>
     public int Width { get; init; }
-    // The height of the grid.
+
+    /// <summary>
+    /// The height of the grid.
+    /// </summary>
     public int Height { get; init; }
 
-    // The grid is a 2D array of cells.
+    /// <summary>
+    /// The grid is a 2D array of cells.
+    /// </summary>
     private CellState[,] cells;
 
-    // The total number of hits on ships.
+    /// <summary>
+    /// The total number of hits on ships.
+    /// </summary>
     private int totalHits = 0;
-    // The total number of ship cells originally placed in the grid.
+
+    /// <summary>
+    /// The total number of ship cells originally placed in the grid.
+    /// </summary>
     private int totalShipCells = 0;
 
-    // Returns true if there are any ships left to be hit.
+    /// <summary>
+    /// Returns true if there are any ships left to be hit.
+    /// </summary>
+    /// <value></value>
     public bool HasFloatingShips
     {
         get => totalShipCells > totalHits;
@@ -52,22 +71,34 @@ public class Grid
         }
     }
 
+    /// <summary>
+    /// Returns the state of the cell at the given coordinates.
+    /// </summary>
+    /// <param name="x">The x-coordinate (zero-based).</param>
+    /// <param name="y">The y-coordinate (zero-based).</param>
+    /// <exception cref="System.ArgumentOutOfRangeException">
+    /// Thrown when either <paramref name="x"/> or <paramref name="y"/> is outside the boundaries of the grid. 
+    /// </exception>
+    /// <returns></returns>
     public CellState GetCell(int x, int y)
     {
-        if (x < 0 || x >= Width || y < 0 || y >= Height)
-            throw new ArgumentOutOfRangeException("Coordinates out of bounds");
+        // Check that the coordinates are valid.
+        if (x < 0 || x >= Width)
+            throw new ArgumentOutOfRangeException(nameof(x), $"x-coordinates must be between 0 and {Width - 1}.");
+        else if (y < 0 || y >= Height)
+            throw new ArgumentOutOfRangeException(nameof(y), $"y-coordinates must be between 0 and {Height - 1}.");
 
         return cells[x, y];
     }
 
     /// <summary>
-    /// Checks if the given cell is within the grid boundaries and whether the cell overlaps with another ship.
+    /// Checks if the given coordinates are within the boundaries of the grid.
     /// </summary>
-    /// <param name="size"></param>
-    /// <param name="x"></param>
-    /// <param name="y"></param>
-    /// <param name="isVertical"></param>
-    /// <returns></returns>
+    /// <param name="ship">The class of the ship to place.</param>
+    /// <param name="x">The x-coordinate of the cell (zero-based).</param>
+    /// <param name="y">The y-coordinate of the cell (zero-based).</param>
+    /// <param name="orientation">The orientation of the ship. </param>
+    /// <returns>True if the ship can be placed at the given coordinates and false otherwise.</returns>
     public bool CanPlaceShip(Ship ship, int x, int y, Orientation orientation)
     {
         if (x < 0 || y < 0)
@@ -105,19 +136,19 @@ public class Grid
     }
 
     /// <summary>
-    /// Attempt to place a ship on the grid, with its bow at the given
+    /// Attempts to place a ship on the grid, with its bow at the given
     /// coordinates. If the ship is out of bounds or overlaps another ship, then
     /// it is not placed.  
     /// The x and y coordinates are zero-based with (0, 0) denoting the top-left
     /// of the grid.
     /// </summary>
+    /// <param name="ship">The class of ship to place.</param>
     /// <param name="size">The number of cells the ship occupies.</param>
     /// <param name="x">The x coordinate of the bow of the ship. The coordinates
     /// are zero-based with (0,0) denoting the top-left of the grid.</param>
     /// <param name="y">The y coordinate of the bow of the ship. The coordinates
     /// are zero-based with (0,0) denoting the top-left of the grid.</param>
-    /// <param name="isVertical">Whether the ship is vertical or horizontal.
-    /// </param>
+    /// <param name="orientation">The orientation of the ship (vertical or horizontal).</param>
     /// <returns>
     /// True if the ship can be placed in the given coordinates. False
     /// otherwise.
@@ -148,12 +179,19 @@ public class Grid
     /// </summary>
     /// <param name="targetX">The x-coordinate of the target cell.</param>
     /// <param name="targetY">The y-coordinate of the target cell</param>
-    /// <returns>True if and only if the target was originally a Ship. Otherwise returns false.</returns>
+    /// <exception cref="System.ArgumentOutOfRangeException">
+    /// Thrown when either <paramref name="targetX"/> or <paramref name="targetY"/> is outside the boundaries of the grid. 
+    /// </exception>
+    /// <returns>Returns true if and only if the target was originally a Ship. Otherwise returns false.</returns>
     public bool TakeShot(int targetX, int targetY)
     {
-        if (targetX < 0 || targetX >= Width || targetY < 0 || targetY >= Height)
-            throw new ArgumentOutOfRangeException($"The coordinate {(targetX, targetY)} is out of bounds: [0,0] to [{Width - 1}, {Height - 1}]");
+        // Check if the target is within the grid.
+        if (targetX < 0 || targetX >= Width)
+            throw new ArgumentOutOfRangeException(nameof(targetX), $"The x-coordinate must be between 0 and {Width - 1}.");
+        else if (targetY < 0 || targetY >= Height)
+            throw new ArgumentOutOfRangeException(nameof(targetY), $"The y-coordinate must be between 0 and {Height - 1}.");
 
+        // Update the cell state.
         switch (cells[targetX, targetY])
         {
             case CellState.Sea:
