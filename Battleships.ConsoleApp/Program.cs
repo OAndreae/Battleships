@@ -11,30 +11,28 @@ public class Program
         var game = new BattleshipsGame(InputPlayerCoordinates, RandomCoordinate, DisplayMapsHorizontally);
         OutputWelcomeMessage();
         game.Run();
-    }
 
-    /// <summary>
-    /// Outputs a welcome message and instructions for the player.
-    /// </summary>
-    private static void OutputWelcomeMessage() 
-    {
-        WriteLine();
-        WriteLine("Welcome to Battleships.\n\n" +
-        "At each turn, enter the coordinates of the square you wish to attack (e.g. A0 for the top left corner).\n" +
-        "Squares are marked as follows:\n" +
-        "  ≈ - Sea\n" +
-        "  S - Ship");
-        Console.ForegroundColor = ConsoleColor.Red;
-        Write("  X");
-        Console.ResetColor();
-        WriteLine(" - Hit");
-        Console.ForegroundColor = ConsoleColor.Cyan;
-        Write("  M");
-        Console.ResetColor();
-        WriteLine(" - Miss");
+        // Outputs a welcome message and instructions for the player.
+        void OutputWelcomeMessage()
+        {
+            WriteLine();
+            WriteLine("Welcome to Battleships.\n\n" +
+            "At each turn, enter the coordinates of the square you wish to attack (e.g. A0 for the top left corner).\n" +
+            "Squares are marked as follows:\n" +
+            "  ≈ - Sea\n" +
+            "  S - Ship");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Write("  X");
+            Console.ResetColor();
+            WriteLine(" - Hit");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Write("  M");
+            Console.ResetColor();
+            WriteLine(" - Miss");
 
-        WriteLine("\nPress CMD+C or CTRL+C to exit at any time.\n");
-        WriteLine("Good luck.");
+            WriteLine("\nPress CMD+C or CTRL+C to exit at any time.\n");
+            WriteLine("Good luck.");
+        }
     }
 
     /// <summary>
