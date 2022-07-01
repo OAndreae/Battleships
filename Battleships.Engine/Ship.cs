@@ -1,7 +1,7 @@
 namespace Battleships.Engine;
 
 /// <summary>
-/// A ship that can be placed on a Grid.
+/// Represents a ship that can be placed on a Grid.
 /// </summary>
 public record Ship {
     public int Size { get; init;}

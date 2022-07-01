@@ -1,6 +1,9 @@
 using System;
 namespace Battleships.Engine;
 
+/// <summary>
+/// Represents the two players in the game.
+/// </summary>
 public enum Player
 {
     Player1,
@@ -10,6 +13,9 @@ public enum Player
 public delegate (int, int) CoordinateInput(int gridWidth, int gridHeight);
 public delegate void MapDisplay(Grid own, Grid opponent);
 
+/// <summary>
+/// Controls the logic of the game.
+/// </summary>
 public class BattleshipsGame
 {
     private Player currentPlayer;
