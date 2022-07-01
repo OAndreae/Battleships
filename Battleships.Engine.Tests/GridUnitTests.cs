@@ -1,10 +1,23 @@
 using Xunit;
 using Battleships.Engine;
+using System;
 
 namespace Battleships.Engine.Tests;
 
 public class GridUnitTests
 {
+    [Theory]
+    [InlineData(-1, -1)]
+    [InlineData(10, 10)]
+    public void GetCell_CoordinatesOutOfBounds_ThrowsArgumentOutOfRangeException(int x, int y)
+    {
+        // Arrange
+        var grid = new Grid(10, 10);
+
+        // Act & Assert
+        Assert.Throws<ArgumentOutOfRangeException>(() => grid.GetCell(x, y));
+    }
+
     [Theory]
     [InlineData(9, 9, Orientation.Vertical)] // Vertical ship in bottom right corner.
     [InlineData(0, 9, Orientation.Vertical)] // Vertical ship in bottom left corner.
