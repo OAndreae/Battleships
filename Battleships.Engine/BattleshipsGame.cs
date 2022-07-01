@@ -36,38 +36,6 @@ public class BattleshipsGame
     }
 
     /// <summary>
-    /// Places two destroyers and one battleship on the grid.
-    /// </summary>
-    /// <param name="grid">The Grid to place ships on.</param>
-    private void PlaceShipsOnGrid(Grid grid)
-    {
-        // Place two destroyers and one battleship on the grid.
-        PlaceShipClass(Ship.Destroyer, 2, grid);
-        PlaceShipClass(Ship.Battleship, 1, grid);
-
-        // Place n ships of the given class on the grid.
-        void PlaceShipClass(Ship ship, int n, Grid g)
-        {
-            var random = new Random();
-
-            int shipsPlaced = 0;
-
-            // Keep placing ships at random until locations are found that don't overlap.
-            while (shipsPlaced < n)
-            {
-                var x = random.Next(g.Width);
-                var y = random.Next(g.Height);
-                var orientation = random.Next(2) == 0 ? Orientation.Horizontal : Orientation.Vertical;
-                if (g.TryPlaceShip(ship, x, y, orientation))
-                {
-                    // Ship was placed successfully.
-                    shipsPlaced++;
-                }
-            }
-        }
-    }
-
-    /// <summary>
     /// Runs the game loop and shows the map for player 1.
     /// </summary>
     public void Run()
@@ -97,6 +65,38 @@ public class BattleshipsGame
         {
             var (x, y) = getInput(opponentGrid.Width, opponentGrid.Height);
             opponentGrid.TakeShot(x, y);
+        }
+    }
+
+    /// <summary>
+    /// Places two destroyers and one battleship on the grid.
+    /// </summary>
+    /// <param name="grid">The Grid to place ships on.</param>
+    private void PlaceShipsOnGrid(Grid grid)
+    {
+        // Place two destroyers and one battleship on the grid.
+        PlaceShipClass(Ship.Destroyer, 2, grid);
+        PlaceShipClass(Ship.Battleship, 1, grid);
+
+        // Place n ships of the given class on the grid.
+        void PlaceShipClass(Ship ship, int n, Grid g)
+        {
+            var random = new Random();
+
+            int shipsPlaced = 0;
+
+            // Keep placing ships at random until locations are found that don't overlap.
+            while (shipsPlaced < n)
+            {
+                var x = random.Next(g.Width);
+                var y = random.Next(g.Height);
+                var orientation = random.Next(2) == 0 ? Orientation.Horizontal : Orientation.Vertical;
+                if (g.TryPlaceShip(ship, x, y, orientation))
+                {
+                    // Ship was placed successfully.
+                    shipsPlaced++;
+                }
+            }
         }
     }
 }
