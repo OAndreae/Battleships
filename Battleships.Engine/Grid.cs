@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 
 namespace Battleships.Engine;
 
@@ -8,7 +7,6 @@ namespace Battleships.Engine;
 /// </summary>
 public class Grid
 {
-
     /// <summary>
     /// The width of the grid.
     /// </summary>
