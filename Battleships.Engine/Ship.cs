@@ -4,6 +4,9 @@ namespace Battleships.Engine;
 /// Represents a ship that can be placed on a Grid.
 /// </summary>
 public record Ship {
+    /// <summary>
+    /// The number of cells the ship occupies.
+    /// </summary>
     public int Size { get; init;}
 
     /// <summary>
