@@ -1,6 +1,9 @@
 # Battleships
 A console-based game of MB's Battleships.
 
+## Build instructions
+Open the folder `Battleships.ConsoleApp` and open a terminal. Run the command `dotnet run`.
+
 ## Guidelines
 The final code should be simple and readable: not over-engineered. Research the following practices and *then* code the Battleships application.
 

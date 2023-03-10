@@ -133,7 +133,7 @@ public class Program
         WriteLine();
         DisplayHeaders(own, opponent, ownMapHeader, opponentMapHeader);
         DisplayColumnNumbers(own, opponent);
-        DisplayGridRows(own, opponent, hideOpponentShips: false);
+        DisplayGridRows(own, opponent, hideOpponentShips: true);
         WriteLine();
 
         void WriteSpaces(int spaces) => Write(new string(' ', spaces));
