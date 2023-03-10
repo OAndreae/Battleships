@@ -1,8 +1,16 @@
 {
 	"folders": [
 		{
-			"path": "."
+			"path": "Battleships.ConsoleApp"
+		},
+		{
+			"path": "Battleships.Engine.Tests"
+		},
+		{
+			"path": "Battleships.Engine"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"dotnet-test-explorer.testProjectPath": "Battleships.Engine.Tests"
+	}
 }
